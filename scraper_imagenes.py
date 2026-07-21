@@ -3,7 +3,7 @@ import requests
 from bs4 import BeautifulSoup
 import time
 
-def descargar_imagenes_yupoo(url_pagina, base_path, nombre_producto):
+def descargar_imagenes(url_pagina, base_path, nombre_producto):
     #carpeta nombre del producto
     carpeta_destino = os.path.join(base_path, nombre_producto)
     
@@ -33,8 +33,7 @@ def descargar_imagenes_yupoo(url_pagina, base_path, nombre_producto):
         url = img['data-origin-src']
         if url.startswith('//'):
             url = 'https:' + url
-            
-        # Filtro: Solo fotos del servidor de fotos de Yupoo y sin duplicados
+
         if 'photo.yupoo.com' in url and url not in urls_unicas:
             urls_unicas.add(url)
             
@@ -63,4 +62,4 @@ if __name__ == "__main__":
     URL_ALBUM = "" # Url del producto a scrapear 
     RUTA_BASE = r""  # Ruta en la que se guardan las imagenes
     
-    descargar_imagenes_yupoo(URL_ALBUM, RUTA_BASE, NOMBRE)
+    descargar_imagenes(URL_ALBUM, RUTA_BASE, NOMBRE)
